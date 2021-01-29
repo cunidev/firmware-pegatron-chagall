@@ -1,0 +1,33 @@
+# Maintainer: Raffaele Tranquillini <raffaele.tranquillini@gmail.com>
+
+pkgname=firmware-pegatron-chagall
+pkgver=1
+pkgrel=0
+pkgdesc="Firmware for Pegatron Chagall (pegatron-chagall)"
+url="https://github.com/clamor95/linux-firmware"
+arch="armv7"
+license="custom:proprietary"
+options="!check !strip !archcheck !spdx"
+source="BCM4329B1_002.002.023.0797.0879.hcd
+    BCM4330B1.hcd
+	brcmfmac4329-sdio.pegatron,chagall.txt
+	brcmfmac4330-sdio.pegatron,chagall.txt"
+
+package() {
+	# Bluetooth
+	install -D -m644 "$srcdir"/BCM4329B1_002.002.023.0797.0879.hcd \
+		"$pkgdir"/lib/firmware/postmarketos/brcm/BCM4329B1.hcd
+	install -D -m644 "$srcdir"/BCM4330B1.hcd \
+		"$pkgdir"/lib/firmware/postmarketos/brcm/BCM4330B1.hcd
+
+	# Wi-Fi
+	install -D -m644 "$srcdir"/brcmfmac4329-sdio.pegatron,chagall.txt \
+		"$pkgdir"/lib/firmware/postmarketos/brcm/brcmfmac4329-sdio.pegatron,chagall.txt
+	install -D -m644 "$srcdir"/brcmfmac4330-sdio.pegatron,chagall.txt \
+		"$pkgdir"/lib/firmware/postmarketos/brcm/brcmfmac4330-sdio.pegatron,chagall.txt
+}
+
+sha512sums="26534cbef298d7594ed6d8a58380ed3b1593a195aaa2c9e5108dce82dbaec4da922f49217342397d405131d827873dca1c78ab2e73c4bae0901b2c77ff56f9b2  BCM4329B1_002.002.023.0797.0879.hcd
+62dad5ee720a16bda4ea8ff2de302b4225055161f3fd062cc0f6d95e0469a48c11a92bacc40aead982c54ef2459c9cb9169378bbcb93acac7524198f64355a45  BCM4330B1.hcd
+655f2bda94ca1c9ff26fba4c2eb69121fed461325dfd14342262240d5833d063839311bd0b8e2efffbab9b19a0852c5ab57b267c97e8a0205f810a2259840159  brcmfmac4329-sdio.pegatron,chagall.txt
+751f4a26b7bb393567859aa0935b904889a427ad6f28c2b7410bdef9198146146bfb7c572ee8c5e66ed356435d7474235009996d618fd339a4a5896a6e8f2b83  brcmfmac4330-sdio.pegatron,chagall.txt"
